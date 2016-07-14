@@ -1,8 +1,16 @@
-<!DOCTYPE html><html lang="en-us"><head>
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Painless Scripting Language
         | Elasticsearch Reference [master]
       | Elastic
-    </title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.html" title="Elasticsearch Reference [master]" /><link rel="up" href="modules-scripting.html" title="Scripting" /><link rel="prev" href="modules-scripting-groovy.html" title="Groovy Scripting Language" /><link rel="next" href="modules-scripting-expression.html" title="Lucene Expressions Language" /><meta name="description" content="Get started with the documentation for Elasticsearch, Kibana, Logstash, Beats, X-Pack, Elastic Cloud, Elasticsearch for Apache Hadoop, and our language clients." /><meta name="DC.type" content="Docs/Elasticsearch/Reference/master" /><meta http-equiv="content-type" content="text/html; charset=utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><script type='text/javascript' async>
+    </title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.html" title="Elasticsearch Reference [master]" /><link rel="up" href="modules-scripting.html" title="Scripting" /><link rel="prev" href="modules-scripting-groovy.html" title="Groovy Scripting Language" /><link rel="next" href="modules-scripting-painless-syntax.html" title="Painless Syntax" /><meta name="description" content="Get started with the documentation for Elasticsearch, Kibana, Logstash, Beats, X-Pack, Elastic Cloud, Elasticsearch for Apache Hadoop, and our language clients." /><meta name="DC.type" content="Docs/Elasticsearch/Reference/master" />
+  	
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- RTP tag -->
+    <script type='text/javascript' async>
     (function(c,h,a,f,i,e){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
      c[a].a=i;c[a].e=e;var g=h.createElement("script");g.async=true;g.type="text/javascript";
      g.src=f+'?aid='+i;var b=h.getElementsByTagName("script")[0];b.parentNode.insertBefore(g,b);
@@ -10,14 +18,95 @@
 
     rtp('send','view');
     rtp('get', 'campaign',true);
-    </script><link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="manifest" href="/manifest.json"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ffffff"><meta name="apple-mobile-web-app-title" content="Elastic"><meta name="application-name" content="Elastic"><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="/mstile-144x144.png"><meta name="theme-color" content="#ffffff"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><link rel="schema.DCTERMS" href="http://purl.org/dc/terms/"><meta name="description" content=""/><meta property="og:image" content="/static/img/cluster-small.png"/><link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"><link rel="icon" href="/favicon.ico" type="image/x-icon"><link rel="apple-touch-icon-precomposed" sizes="64x64" href="/favicon_64x64_16bit.png"><link rel="apple-touch-icon-precomposed" sizes="32x32" href="/favicon_32x32.png"><link rel="apple-touch-icon-precomposed" sizes="16x16" href="/favicon_16x16.png"><link href="https://stag-static-www.elastic.co/static/css/main.css?q=266" rel="stylesheet"><script src="https://stag-static-www.elastic.co/static/js/jquery.min.js?q=266"></script><script src="https://stag-static-www.elastic.co/static/js/bootstrap.min.js?q=266"></script> <!--[if lt IE 9]><script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script><script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]--><link type="text/css" rel="stylesheet" href="https://stag-static-www.elastic.co/static/css/guide.css?q=266"/>
+    </script>
+    <!-- End of RTP tag -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ffffff">
+<meta name="apple-mobile-web-app-title" content="Elastic">
+<meta name="application-name" content="Elastic">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<!-- DC tags section -->
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" >
+<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" >
+
+
+<!-- end DC tags -->
+
+
+	<meta name="description" content="" />
+
+
+
+
+
+	<meta property="og:image" content="/static/img/cluster-small.png" />
+
+		
+
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <!-- For third-generation iPad with high-resolution Retina display: -->
+    <link rel="apple-touch-icon-precomposed" sizes="64x64" href="/favicon_64x64_16bit.png">
+    <!-- For iPhone with high-resolution Retina display: -->
+    <link rel="apple-touch-icon-precomposed" sizes="32x32" href="/favicon_32x32.png">
+    <!-- For first- and second-generation iPad: -->
+    <link rel="apple-touch-icon-precomposed" sizes="16x16" href="/favicon_16x16.png">
+
+	   
+
+    <!-- css -->
+    <link href="https://stag-static-www.elastic.co/static/css/main.css?q=852" rel="stylesheet">
+    
+    
+
+    <script src="https://stag-static-www.elastic.co/static/js/jquery.min.js?q=852"></script>
+    <script src="https://stag-static-www.elastic.co/static/js/bootstrap.min.js?q=852"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	
+	<link type="text/css" rel="stylesheet" href="https://stag-static-www.elastic.co/static/css/guide.css?q=852" />
+
+
+  
 <link rel="stylesheet" type="text/css" href="styles.css" />
 
-</head><body><script>dataLayer = [];</script><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-58RLH5" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+</head>
+  <body >
+  	<!-- Google Tag Manager -->
+    <script>dataLayer = [];</script><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-58RLH5"
+                              height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-58RLH5');</script><script data-cfasync="false" type='text/javascript'>/*<![CDATA[*/window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https:"?"https:":"http:",z=c.name,r="load";var nt=function(){
+    })(window,document,'script','dataLayer','GTM-58RLH5');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- begin olark code -->
+    <script data-cfasync="false" type='text/javascript'>/*<![CDATA[*/window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https:"?"https:":"http:",z=c.name,r="load";var nt=function(){
     f[z]=function(){
     (a.s=a.s||[]).push(arguments)};var a=f[z]._={
     },q=c.methods.length;while(q--){(function(n){f[z][n]=function(){
@@ -34,22 +123,241 @@
     b[k]=o+'d.write("'+p().replace(/"/g,String.fromCharCode(92)+'"')+'");d.close();'}a.P(2)};ld()};nt()})({
     loader: "static.olark.com/jsclient/loader0.js",name:"olark",methods:["configure","extend","declare","identify"]});
     /* custom configuration goes here (www.olark.com/documentation) */
-    olark.identify('1356-750-10-5709');/*]]>*/</script><noscript><a href="https://www.olark.com/site/1356-750-10-5709/contact" title="Contact us" target="_blank">Questions? Feedback?</a> powered by <a href="http://www.olark.com?welcome" title="Olark live chat software">Olark live chat software</a></noscript><header class="header-wrapper"><div class="navigation-wrapper"><div class="container"><nav class="navbar"><div class="navbar-mobile-header navbar-header mr-20 mr-xs-0"><div class="row hidden-sm hidden-md hidden-lg"><div class="col-xs-5 hidden-sm hidden-md hidden-lg"><div class="navbar-mobile-header-icon navbar-mobile-header-icon-out"><span></span><span></span><span></span></div> <a href="/learn" class="nav-title hidden-sm hidden-md hidden-lg m-l-8">Learn</a></div><div class="col-xs-2 text-center"><div class="navbar-brand" id="elastic"><h1> <a class="logo-m hidden-sm hidden-md hidden-lg" href="/"><img src="https://stag-static-www.elastic.co/assets/bltd5ac38b4549d53de/elastic-logo-mobile (1).svg?q=266" alt="elastic-logo-mobile"></a></h1></div></div><div class="col-xs-5 hidden-sm hidden-md hidden-lg text-right"><ul class="menu-m hidden-sm hidden-md hidden-lg"><li class=""><a class="icon-contact" href="/contact"></a></li><li id="searchbar"><a class="button icon" href="#"></a></li><li class="lang global-language"> <a href="#">EN</a><ul class="language-list"><li><a href="/">English</a></li><li><a href="/fr/">Français</a></li><li><a href="/de/">Deutsch</a></li><li><a href="/jp/">日本語</a></li><li><a href="/kr/">한국어</a></li></ul></li></ul></div></div><div class="navbar-brand hidden-xs" id="elastic"><h1> <a class="hidden-xs" id="elastic-logo" href="/"><img src="https://stag-static-www.elastic.co/assets/blt6050efb80ceabd47/elastic-logo (2).svg?q=266" alt="elastic-logo"></a></h1></div></div><div class="collapse navbar-collapse mobile-inner-nav"><nav class="nav navbar-nav primary-nav-hover" id="nav"><ul><li> <a id="nav_products" class=" " href="/products">Products</a></li><li> <a id="nav_cloud" class=" " href="/cloud">Cloud</a></li><li> <a id="nav_services" class=" " href="/services">Services</a></li><li> <a id="nav_customers" class=" " href="/use-cases">Customers</a></li><li> <a id="nav_learn" class="active" href="/learn">Learn</a></li></ul></nav><nav class="nav navbar-nav navbar-right hidden-xs"><ul><li class="hidden-xs hidden-sm"><a href="/downloads">downloads</a></li><li class="hidden-xs hidden-md hidden-lg"><a class="icon-download" href="/downloads"></a></li><li class="hidden-xs hidden-sm"><a class="btn btn-secondary btn-contact" href="/contact?storm=global-header-en">contact</a></li><li class="hidden-xs hidden-md hidden-lg"><a class="icon-contact" href="/contact?storm=global-header-en"></a></li><li class="hidden-xs" id="searchbar"><a class="button icon" href="#"></a></li><li class="hidden-xs lang global-language"> <a href="#">EN</a><ul class="language-list"><li><a class="" href="/">English</a></li><li><a class="" href="/fr/">Français</a></li><li><a class="" href="/de/">Deutsch</a></li><li><a class="" href="/jp/">日本語</a></li><li><a class="" href="/kr/">한국어</a></li></ul></li></ul></nav></div></nav></div></div><div class="header-search-wrapper open-search"><div class="container"><div class="big-search"><i class="big-search-icon"></i><form id="searchfrm" name="searchForm" autocomplete="on" action="/search" method="get"><ul class="tags-wrapper"><li class="search-field"><input type="text" name="q" id="autocomplete" class="form-control global-input" autocomplete="off"></li></ul></form><a class="header-search-cancel" href="#"></a></div><div class="nav-auto-complete"></div></div></div></header><style> 
+    olark.identify('1356-750-10-5709');/*]]>*/</script><noscript><a href="https://www.olark.com/site/1356-750-10-5709/contact" title="Contact us" target="_blank">Questions? Feedback?</a> powered by <a href="http://www.olark.com?welcome" title="Olark live chat software">Olark live chat software</a></noscript>
+    <!-- end olark code -->
+
+
+    <!-- Header Section -->
+    
+<header class="header-wrapper">
+   
+
+  
+
+
+
+
+<div class="navigation-wrapper">
+  <div class="container">
+    <nav class="navbar">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-mobile-header navbar-header mr-20 mr-xs-0">
+      <div class="row hidden-sm hidden-md hidden-lg">
+        <div class="col-xs-5 hidden-sm hidden-md hidden-lg">
+          <div class="navbar-mobile-header-icon navbar-mobile-header-icon-out">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          
+            <a href="/learn" class="nav-title hidden-sm hidden-md hidden-lg m-l-8">Learn</a>
+          
+        </div>
+        <div class="col-xs-2 text-center">
+          <div class="navbar-brand" id="elastic">
+            <h1>
+              <a class="logo-m hidden-sm hidden-md hidden-lg" href="/">
+                <img src="https://stag-static-www.elastic.co/assets/bltd5ac38b4549d53de/elastic-logo-mobile (1).svg?q=852" alt="elastic-logo-mobile">
+              </a>
+            </h1>
+          </div>
+        </div>
+        <div class="col-xs-5 hidden-sm hidden-md hidden-lg text-right">
+          <ul class="menu-m hidden-sm hidden-md hidden-lg">
+            <li class=""><a class="icon-contact" href="/contact"></a></li>
+            <li id="searchbar"><a class="button icon" href="#"></a></li>
+            <li class="lang global-language">
+                
+                  <a href="#">EN</a>
+                
+              <ul class="language-list">
+                
+                  
+                    
+                  
+                <li><a href="/" data-value="/" id="locale-select">English</a></li>
+                
+                  
+                    
+                  
+                <li><a href="/fr/" data-value="/fr/" id="locale-select">Français</a></li>
+                
+                  
+                    
+                  
+                <li><a href="/de/" data-value="/de/" id="locale-select">Deutsch</a></li>
+                
+                  
+                    
+                  
+                <li><a href="/jp/" data-value="/jp/" id="locale-select">日本語</a></li>
+                
+                  
+                    
+                  
+                <li><a href="/kr/" data-value="/kr/" id="locale-select">한국어</a></li>
+                
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="navbar-brand hidden-xs" id="elastic">
+        <h1>
+          <a class="hidden-xs" id="elastic-logo" href="/">
+            <img src="https://stag-static-www.elastic.co/assets/blt6050efb80ceabd47/elastic-logo (2).svg?q=852" alt="elastic-logo">
+          </a>
+        </h1>
+      </div>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse mobile-inner-nav">
+      <nav class="nav navbar-nav primary-nav-hover" id="nav">
+        <ul>
+        
+          
+            
+              
+            
+            <li>
+              <a id="nav_products" class=" " href="/products">Products</a>
+            </li>
+          
+        
+          
+            
+              
+            
+            <li>
+              <a id="nav_cloud" class=" " href="/cloud">Cloud</a>
+            </li>
+          
+        
+          
+            
+              
+            
+            <li>
+              <a id="nav_services" class=" " href="/services">Services</a>
+            </li>
+          
+        
+          
+            
+              
+            
+            <li>
+              <a id="nav_customers" class=" " href="/use-cases">Customers</a>
+            </li>
+          
+        
+          
+            
+              
+            
+            <li>
+              <a id="nav_learn" class="active" href="/learn">Learn</a>
+            </li>
+          
+        
+          
+        
+        </ul>
+      </nav>
+      <nav class="nav navbar-nav navbar-right hidden-xs">
+        <ul>
+          <li class="hidden-xs hidden-sm"><a href="/downloads">downloads</a></li>
+          <li class="hidden-xs hidden-md hidden-lg"><a class="icon-download" href="/downloads"></a></li>
+          <!-- To set parameters to contact button -->
+          
+           
+            
+          
+
+          
+            
+            
+          
+          <li class="hidden-xs hidden-sm"><a class="btn btn-secondary btn-contact" href="/contact?storm=global-header-en">contact</a></li>
+          <!-- ////////////////ends here///////////////-->          
+          <li class="hidden-xs hidden-md hidden-lg"><a class="icon-contact" href="/contact?storm=global-header-en"></a></li>
+          <li class="hidden-xs" id="searchbar"><a class="button icon" href="#"></a></li>
+          <li class="hidden-xs lang global-language">
+                
+                  <a href="#">EN</a>
+                
+               <ul class="language-list">
+              
+                
+                  
+                
+              <li><a class="" href="/" data-value="/">English</a></li>
+              
+                
+                  
+                
+              <li><a class="" href="/fr/" data-value="/fr/">Français</a></li>
+              
+                
+                  
+                
+              <li><a class="" href="/de/" data-value="/de/">Deutsch</a></li>
+              
+                
+                  
+                
+              <li><a class="" href="/jp/" data-value="/jp/">日本語</a></li>
+              
+                
+                  
+                
+              <li><a class="" href="/kr/" data-value="/kr/">한국어</a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div><!-- /.navbar-collapse -->
+  </nav>
+  </div>
+</div>
+
+<div class="header-search-wrapper open-search"> 
+  <div class="container">
+    <div class="big-search">
+      <i class="big-search-icon"></i>
+      <form id="searchfrm" name="searchForm" autocomplete="on" action="/search" method="get">
+        <ul class="tags-wrapper">
+          <li class="search-field"><input type="text" name="q" id="autocomplete" class="form-control global-input" autocomplete="off"></li>
+        </ul>
+      </form>
+      <a class="header-search-cancel" href="#"></a>
+    </div>
+    <div class="nav-auto-complete"></div>
+  </div>
+</div>
+</header>
+
+<style> 
     
       .m-shortcuts li a.m-search {
-        background: url("https://stag-static-www.elastic.co/assets/blt7b9c4fe6528dc4ef/m-search-icon.png?q=266") no-repeat scroll center center rgba(0, 0, 0, 0);
+        background: url("https://stag-static-www.elastic.co/assets/blt7b9c4fe6528dc4ef/m-search-icon.png?q=852") no-repeat scroll center center rgba(0, 0, 0, 0);
         background-size: contain;}
     
       .m-shortcuts li a.m-docs {
-        background: url("https://stag-static-www.elastic.co/assets/blt44d8b7530a76d01c/m-guide-icon.png?q=266") no-repeat scroll center center rgba(0, 0, 0, 0);
+        background: url("https://stag-static-www.elastic.co/assets/blt44d8b7530a76d01c/m-guide-icon.png?q=852") no-repeat scroll center center rgba(0, 0, 0, 0);
         background-size: contain;}
     
       .m-shortcuts li a.m-contact {
-        background: url("https://stag-static-www.elastic.co/assets/blt878040795c9d083b/m-contact-icon.png?q=266") no-repeat scroll center center rgba(0, 0, 0, 0);
+        background: url("https://stag-static-www.elastic.co/assets/blt878040795c9d083b/m-contact-icon.png?q=852") no-repeat scroll center center rgba(0, 0, 0, 0);
         background-size: contain;}
     
     
-</style><script type="text/javascript">
+</style>
+
+<script type="text/javascript">
   $(document).ready( function(){
     $('.navbar-toggle').on('click', function(){
       $('.mobile-navigation, .menu-open').hide();
@@ -119,7 +427,69 @@
       });
     }
   });
-</script><div class="tertiary-nav"><div class="container"><div class="p-t-b-15 bdr-btm-e0e0e0 clearfix"><div class="breadcrum-wrapper pull-left text-left"> <a href="/guide">Docs</a></div></div></div></div><div class="nav-mobile-dropdown hidden-sm hidden-md hidden-lg bdr-btm-e0e0e0 clearfix"><div class="container"><div class="breadcrum-wrapper pull-left text-left"> <a href="/guide">Docs</a></div></div></div><div class="main-container"><section id="content"><div class="content-wrapper"><section id="guide"><div class="container"><div class="row">
+</script>
+    
+
+
+  
+
+
+
+
+
+  
+  
+  
+  
+    <div class="tertiary-nav">
+      <div class="container">
+        <div class="p-t-b-15 bdr-btm-e0e0e0 clearfix">
+          <div class="breadcrum-wrapper pull-left text-left">
+          
+            <a href="/guide">Docs</a> 
+          
+          </div>
+          
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-mobile-dropdown hidden-sm hidden-md hidden-lg bdr-btm-e0e0e0 clearfix">
+      <div class="container">
+        <div class="breadcrum-wrapper pull-left text-left">
+          
+              <a href="/guide">Docs</a>
+          
+        </div>
+        
+      </div>
+    </div>
+  
+
+    <div class="main-container">
+      <section id="content" >
+        <div class="content-wrapper">   
+          
+            
+        			<!-- <div class="pageheader">
+	<div class="common-container">
+		
+			<h2 class="page-title">Guide template</h2>
+		
+	</div>
+</div> -->
+
+
+        		
+          
+
+          
+	<section id="guide">
+		<div class="container">
+			<div class="row">
+			  <!-- start body -->
+				
             <div class="col-xs-12 col-sm-8 col-md-8 guide-section">
             <!-- start body -->
 <div class="page_header"><b>PLEASE NOTE:</b>
@@ -134,30 +504,22 @@ version&#39;s documentation here</a>.
            
         </span><span class="next">
            
-          <a href="modules-scripting-expression.html">Lucene Expressions Language
+          <a href="modules-scripting-painless-syntax.html">Painless Syntax
                »
             </a></span></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="modules-scripting-painless"></a>Painless Scripting Language<a href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/modules/scripting/painless.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h2></div></div></div><div class="warning admon"><div class="icon"><img alt="Warning" src="images/icons/warning.png" /></div><div class="admon_content"><p>The Painless scripting language is new and is still marked as experimental. The syntax or API may be changed in the future in non-backwards compatible ways if required..</p></div></div><p><span class="emphasis"><em>Painless</em></span> is a simple, secure scripting language available in Elasticsearch
 by default. It is designed specifically for use with Elasticsearch and can
 safely be used with <code class="literal">inline</code> and <code class="literal">stored</code> scripting, which is enabled by
-default.</p><p>A Painless script is essentially a single function. Painless does not provide support
-for defining multiple functions within a script. The Painless syntax is similar to
-<a class="ulink" href="http://groovy-lang.org/index.html" target="_top">Groovy</a>.</p><p>You can use Painless anywhere a script can be used in Elasticsearch—simply set the <code class="literal">lang</code> parameter
+default.</p><p>The Painless syntax is similar to <a class="ulink" href="http://groovy-lang.org/index.html" target="_top">Groovy</a>.</p><p>You can use Painless anywhere a script can be used in Elasticsearch—simply set the <code class="literal">lang</code> parameter
 to <code class="literal">painless</code>.</p><h2><a id="painless-features"></a>Painless Features<a href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/modules/scripting/painless.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h2><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
-Control flow: <code class="literal">for</code> loops, <code class="literal">while</code> loops, <code class="literal">do/while</code> loops, <code class="literal">if/else</code>
+Fast performance: <a class="ulink" href="https://benchmarks.elastic.co/index.html#search_qps_scripts" target="_top">several times faster</a> than the alternatives.
 </li><li class="listitem">
-Fully Typed: all available types/methods described in <a class="link" href="modules-scripting-painless.html#painless-api" title="Painless APIedit">Painless API</a>
+Safety: Fine-grained <a class="link" href="modules-scripting-painless.html#painless-api" title="Painless APIedit">whitelist</a> with method call/field granularity.
 </li><li class="listitem">
-Arithmetic operators: multiplication <code class="literal">*</code>, division <code class="literal">/</code>, addition <code class="literal">+</code>, subtraction <code class="literal">-</code>, precedence <code class="literal">( )</code>
+Optional typing: Variables and parameters can use explicit types or the dynamic <code class="literal">def</code> type.
 </li><li class="listitem">
-Comparison operators: less than <code class="literal">&lt;</code>, less than or equal to <code class="literal">&lt;=</code>, greater than <code class="literal">&gt;</code>, greater than or equal to <code class="literal">&gt;=</code>, equal to <code class="literal">==</code>, and not equal to <code class="literal">!=</code>, reference equals <code class="literal">===</code>, reference not equals <code class="literal">!==</code>
+Syntax: Extends Java’s syntax with a subset of Groovy for ease of use. See the <a class="link" href="modules-scripting-painless-syntax.html" title="Painless Syntax">Syntax Overview</a>.
 </li><li class="listitem">
-Boolean operators: not <code class="literal">!</code>, and <code class="literal">&amp;&amp;</code>, or <code class="literal">||</code>
-</li><li class="listitem">
-Bitwise operators: shift left <code class="literal">&lt;&lt;</code>, shift right <code class="literal">&gt;&gt;</code>, unsigned shift <code class="literal">&gt;&gt;&gt;</code>, and <code class="literal">&amp;</code>, or <code class="literal">|</code>, xor <code class="literal">^</code>, not <code class="literal">~</code>
-</li><li class="listitem">
-Shortcuts for list, map access using the dot <code class="literal">.</code> operator
-</li><li class="listitem">
-Native support for regular expressions with <code class="literal">/pattern/</code>, <code class="literal">=~</code>, and <code class="literal">==~</code>
+Optimizations: Designed specifically for Elasticsearch scripting.
 </li></ul></div><h2><a id="painless-examples"></a>Painless Examples<a href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/modules/scripting/painless.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h2><p>To illustrate how Painless works, let’s load some hockey stats into an Elasticsearch index:</p><div class="pre_wrapper"><pre class="programlisting prettyprint lang-js">PUT hockey/player/_bulk?refresh
 {"index":{"_id":1}}
 {"first":"johnny","last":"gaudreau","goals":[9,27,1],"assists":[17,46,0],"gp":[26,82,1]}
@@ -180,7 +542,7 @@ Native support for regular expressions with <code class="literal">/pattern/</cod
 {"index":{"_id":10}}
 {"first":"mikael","last":"backlund","goals":[3,15,13],"assists":[6,24,18],"gp":[26,82,82]}
 {"index":{"_id":11}}
-{"first":"joe","last":"colborne","goals":[3,18,13],"assists":[6,20,24],"gp":[26,67,82]}</pre></div><div class="console_widget" data-snippet="snippets/modules-scripting-painless/1.json"></div><h3><a id="_accessing_doc_values_from_painless"></a>Accessing Doc Values from Painless<a href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/modules/scripting/painless.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h3><p>Document values can be accessed from a <code class="literal">Map&lt;String,def&gt;</code> named <code class="literal">doc</code>.</p><p>For example, the following script calculates a player’s total goals. This example uses a strongly typed <code class="literal">int</code> and a <code class="literal">for</code> loop.</p><div class="pre_wrapper"><pre class="programlisting prettyprint lang-js">GET hockey/_search
+{"first":"joe","last":"colborne","goals":[3,18,13],"assists":[6,20,24],"gp":[26,67,82]}</pre></div><div class="console_widget" data-snippet="snippets/modules-scripting-painless/1.json"></div><h3><a id="_accessing_doc_values_from_painless"></a>Accessing Doc Values from Painless<a href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/modules/scripting/painless.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h3><p>Document values can be accessed from a <code class="literal">Map</code> named <code class="literal">doc</code>.</p><p>For example, the following script calculates a player’s total goals. This example uses a strongly typed <code class="literal">int</code> and a <code class="literal">for</code> loop.</p><div class="pre_wrapper"><pre class="programlisting prettyprint lang-js">GET hockey/_search
 {
   "query": {
     "function_score": {
@@ -256,7 +618,7 @@ the player’s nickname,  <span class="emphasis"><em>hockey</em></span>.</p><div
 <code class="literal">/pattern/</code>: Pattern literals create patterns. This is the only way to create
 a pattern in painless. The pattern inside the `/`s are just
 <a class="ulink" href="http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html" target="_top">Java regular expressions</a>.
-See <a class="xref" href="modules-scripting-painless.html#modules-scripting-painless-regex-flags" title="Regular expression flagsedit">the section called “Regular expression flags<a href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/modules/scripting/painless.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a>”</a> for more.
+See <a class="xref" href="modules-scripting-painless-syntax.html#modules-scripting-painless-regex-flags" title="Pattern flagsedit">the section called “Pattern flags<a href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/modules/scripting/painless-syntax.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a>”</a> for more.
 </li><li class="listitem">
 <code class="literal">=~</code>: The find operator return a <code class="literal">boolean</code>, <code class="literal">true</code> if a subsequence of the
 text matches, <code class="literal">false</code> otherwise.
@@ -277,390 +639,431 @@ names start with a consonant and end with a vowel:</p><div class="pre_wrapper"><
     "lang": "painless",
     "inline": "if (ctx._source.last ==~ /[^aeiou].*[aeiou]/) {ctx._source.last += \"matched\"} else {ctx.op = 'noop'}"
   }
-}</pre></div><div class="console_widget" data-snippet="snippets/modules-scripting-painless/9.json"></div><p>Or you can use the <code class="literal">Pattern.matcher</code> directory to get a <code class="literal">Matcher</code> instance and
-remove all of the vowels in all of their names:</p><div class="pre_wrapper"><pre class="programlisting prettyprint lang-js">POST hockey/player/_update_by_query
+}</pre></div><div class="console_widget" data-snippet="snippets/modules-scripting-painless/9.json"></div><p>You can use the <code class="literal">Pattern.matcher</code> directly to get a <code class="literal">Matcher</code> instance and
+remove all of the vowels in all of their last names:</p><div class="pre_wrapper"><pre class="programlisting prettyprint lang-js">POST hockey/player/_update_by_query
 {
   "script": {
     "lang": "painless",
     "inline": "ctx._source.last = /[aeiou]/.matcher(ctx._source.last).replaceAll('')"
   }
-}</pre></div><div class="console_widget" data-snippet="snippets/modules-scripting-painless/10.json"></div><p>Note: all of the <code class="literal">_update_by_query</code> examples above could really do with a
+}</pre></div><div class="console_widget" data-snippet="snippets/modules-scripting-painless/10.json"></div><p><code class="literal">Matcher.replaceAll</code> is just a call to Java’s <code class="literal">Matcher</code>'s
+<a class="ulink" href="http://docs.oracle.com/javase/8/docs/api/java/util/regex/Matcher.html#replaceAll-java.lang.String-" target="_top">replaceAll</a>
+method so it supports <code class="literal">$1</code> and <code class="literal">\1</code> for replacements:</p><div class="pre_wrapper"><pre class="programlisting prettyprint lang-js">POST hockey/player/_update_by_query
+{
+  "script": {
+    "lang": "painless",
+    "inline": "ctx._source.last = /n([aeiou])/.matcher(ctx._source.last).replaceAll('$1')"
+  }
+}</pre></div><div class="console_widget" data-snippet="snippets/modules-scripting-painless/11.json"></div><p>If you need more control over replacements you can call <code class="literal">replaceAll</code> on a
+<code class="literal">CharSequence</code> with a <code class="literal">Function&lt;Matcher, String&gt;</code> that builds the replacement.
+This does not support <code class="literal">$1</code> or <code class="literal">\1</code> to access replacements because you already
+have a reference to the matcher and can get them with <code class="literal">m.group(1)</code>.</p><div class="important admon"><div class="icon"><img alt="Important" src="images/icons/important.png" /></div><div class="admon_content"><p>Calling <code class="literal">Matcher.find</code> inside of the function that builds the
+replacement is rude and will likely break the replacement process.</p></div></div><p>This will make all of the vowels in the hockey player’s last names upper case:</p><div class="pre_wrapper"><pre class="programlisting prettyprint lang-js">POST hockey/player/_update_by_query
+{
+  "script": {
+    "lang": "painless",
+    "inline": "ctx._source.last = ctx._source.last.replaceAll(/[aeiou]/, m -&gt; m.group().toUpperCase(Locale.ROOT))"
+  }
+}</pre></div><div class="console_widget" data-snippet="snippets/modules-scripting-painless/12.json"></div><p>Or you can use the <code class="literal">CharSequence.replaceFirst</code> to make the first vowel in their
+last names upper case:</p><div class="pre_wrapper"><pre class="programlisting prettyprint lang-js">POST hockey/player/_update_by_query
+{
+  "script": {
+    "lang": "painless",
+    "inline": "ctx._source.last = ctx._source.last.replaceFirst(/[aeiou]/, m -&gt; m.group().toUpperCase(Locale.ROOT))"
+  }
+}</pre></div><div class="console_widget" data-snippet="snippets/modules-scripting-painless/13.json"></div><p>Note: all of the <code class="literal">_update_by_query</code> examples above could really do with a
 <code class="literal">query</code> to limit the data that they pull back. While you <span class="strong"><strong>could</strong></span> use a
 <a class="xref" href="query-dsl-script-query.html" title="Script Query">Script Query</a> it wouldn’t be as efficient as using any other query
 because script queries aren’t able to use the inverted index to limit the
-documents that they have to check.</p><p>We intentionally don’t allow scripts to call <code class="literal">Pattern.compile</code> to get a new
-pattern on the fly because building a <code class="literal">Pattern</code> is (comparatively) slow.
-Pattern literals (<code class="literal">/apattern/</code>) have fancy constant extraction so no matter
-where they show up in the painless script they are built only when the script
-is first used. It is fairly similar to how <code class="literal">String</code> literals work in Java.</p><h4><a id="modules-scripting-painless-regex-flags"></a>Regular expression flags<a href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/modules/scripting/painless.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h4><p>You can define flags on patterns in Painless by adding characters after the
-trailing <code class="literal">/</code> like <code class="literal">/foo/i</code> or <code class="literal">/foo \w #comment/iUx</code>. Painless exposes all the
-flags from
-<a class="ulink" href="https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html" target="_top">Java’s Pattern class</a>
-using these characters:</p><div class="informaltable"><table cellpadding="4px" border="1"><colgroup><col class="col_1" /><col class="col_2" /><col class="col_3" /></colgroup><thead><tr><th align="left" valign="top"> Character </th><th align="left" valign="top"> Java Constant </th><th align="left" valign="top"> Example</th></tr></thead><tbody><tr><td align="left" valign="top"><p><code class="literal">c</code></p></td><td align="left" valign="top"><p>CANON_EQ</p></td><td align="left" valign="top"><p><code class="literal">'å' ==~ /å/c</code> (open in hex editor to see)</p></td></tr><tr><td align="left" valign="top"><p><code class="literal">i</code></p></td><td align="left" valign="top"><p>CASE_INSENSITIVE</p></td><td align="left" valign="top"><p><code class="literal">'A' ==~ /a/i</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">l</code></p></td><td align="left" valign="top"><p>LITERAL</p></td><td align="left" valign="top"><p><code class="literal">'[a]' ==~ /[a]/l</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">m</code></p></td><td align="left" valign="top"><p>MULTILINE</p></td><td align="left" valign="top"><p><code class="literal">'a\nb\nc' =~ /^b$/m</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">s</code></p></td><td align="left" valign="top"><p>DOTALL (aka single line)</p></td><td align="left" valign="top"><p><code class="literal">'a\nb\nc' =~ /.b./s</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">U</code></p></td><td align="left" valign="top"><p>UNICODE_CHARACTER_CLASS</p></td><td align="left" valign="top"><p><code class="literal">'Ɛ' ==~ /\\w/U</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">u</code></p></td><td align="left" valign="top"><p>UNICODE_CASE</p></td><td align="left" valign="top"><p><code class="literal">'Ɛ' ==~ /ɛ/iu</code></p></td></tr><tr><td align="left" valign="top"><p><code class="literal">x</code></p></td><td align="left" valign="top"><p>COMMENTS (aka extended)</p></td><td align="left" valign="top"><p><code class="literal">'a' ==~ /a #comment/x</code></p></td></tr></tbody></table></div><h2><a id="painless-api"></a>Painless API<a href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/modules/scripting/painless.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h2><p>The following types are available for use in the Painless language. Most types and methods map directly to their Java equivalents—for more information, see the corresponding <a class="ulink" href="https://docs.oracle.com/javase/8/docs/api/java/lang/package-summary.html" target="_top">Javadoc</a>.</p><h3><a id="_dynamic_types"></a>Dynamic Types<a href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/modules/scripting/painless.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h3><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
-<code class="literal">def</code> (This type can be used to represent any other type.)
-</li></ul></div><h3><a id="_basic_types"></a>Basic Types<a href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/modules/scripting/painless.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h3><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
-<code class="literal">void</code>
+documents that they have to check.</p><h2><a id="painless-api"></a>Painless API<a href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/modules/scripting/painless.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h2><p>The following Java packages are available for use in the Painless language:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+<a class="ulink" href="https://docs.oracle.com/javase/8/docs/api/java/lang/package-summary.html" target="_top">java.lang</a>
 </li><li class="listitem">
-<code class="literal">boolean</code>
+<a class="ulink" href="https://docs.oracle.com/javase/8/docs/api/java/math/package-summary.html" target="_top">java.math</a>
 </li><li class="listitem">
-<code class="literal">short</code>
+<a class="ulink" href="https://docs.oracle.com/javase/8/docs/api/java/text/package-summary.html" target="_top">java.text</a>
 </li><li class="listitem">
-<code class="literal">char</code>
+<a class="ulink" href="https://docs.oracle.com/javase/8/docs/api/java/time/package-summary.html" target="_top">java.time</a>
 </li><li class="listitem">
-<code class="literal">int</code>
+<a class="ulink" href="https://docs.oracle.com/javase/8/docs/api/java/time/chrono/package-summary.html" target="_top">java.time.chrono</a>
 </li><li class="listitem">
-<code class="literal">long</code>
+<a class="ulink" href="https://docs.oracle.com/javase/8/docs/api/java/time/format/package-summary.html" target="_top">java.time.format</a>
 </li><li class="listitem">
-<code class="literal">float</code>
+<a class="ulink" href="https://docs.oracle.com/javase/8/docs/api/java/time/temporal/package-summary.html" target="_top">java.time.temporal</a>
 </li><li class="listitem">
-<code class="literal">double</code>
-</li></ul></div><h3><a id="_complex_types"></a>Complex Types<a href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/modules/scripting/painless.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h3><p>Non-static methods/members in superclasses are available to subclasses.
-Generic types with unspecified generic parameters are parameters of type <code class="literal">def</code>.</p><pre class="screen">ArithmeticException extends Exception
-   &lt;init&gt;()</pre><pre class="screen">ArrayList extends List
-   &lt;init&gt;()</pre><pre class="screen">ArrayList&lt;Object&gt; extends List&lt;Object&gt;
-   &lt;init&gt;()</pre><pre class="screen">ArrayList&lt;String&gt; extends List&lt;String&gt;
-    &lt;init&gt;()</pre><pre class="screen">Boolean extends Object
-   &lt;init&gt;(boolean)
-   static Boolean valueOf(boolean)
-   boolean booleanValue()</pre><pre class="screen">Character extends Object
-    &lt;init&gt;(char)
-    static Character valueOf(char)
-    char charValue()
-    static char MIN_VALUE
-    static char MAX_VALUE</pre><pre class="screen">CharSequence extends Object
-    char charAt(int)
-    int length()</pre><pre class="screen">Collection extends Object
-    boolean add(def)
-    void clear()
-    boolean contains(def)
-    boolean isEmpty()
-    Iterator iterator()
-    boolean remove(def)
-    int size()</pre><pre class="screen">Collection&lt;Object&gt; extends Object
-    boolean add(Object)
-    void clear()
-    boolean contains(Object)
-    boolean isEmpty()
-    Iterator iterator()
-    boolean remove(Object)
-    int size()</pre><pre class="screen">Collection&lt;String&gt; extends Object
-    boolean add(String)
-    void clear()
-    boolean contains(String)
-    boolean isEmpty()
-    Iterator iterator()
-    boolean remove(String)
-    int size()</pre><pre class="screen">Double extends Number
-    &lt;init&gt;(double)
-    static Double valueOf(double)
-    static double MIN_VALUE
-    static double MAX_VALUE</pre><pre class="screen">Exception extends Object
-    String getMessage()</pre><pre class="screen">Float extends Number
-    &lt;init&gt;(float)
-    static Float valueOf(float)
-    static float MIN_VALUE
-    static float MAX_VALUE</pre><pre class="screen">HashMap extends Map
-    &lt;init&gt;()</pre><pre class="screen">HashMap&lt;Object,Object&gt; extends Map&lt;Object,Object&gt;
-    &lt;init&gt;()</pre><pre class="screen">HashMap&lt;String,def&gt; extends Map&lt;String,def&gt;
-    &lt;init&gt;()</pre><pre class="screen">HashMap&lt;String,Object&gt; extends Map&lt;String,Object&gt;
-    &lt;init&gt;()</pre><pre class="screen">IllegalArgument extends Exception
-    &lt;init&gt;()</pre><pre class="screen">IllegalState extends Exception
-    &lt;init&gt;()</pre><pre class="screen">Integer extends Number
-    &lt;init&gt;(int)
-    static Integer valueOf(int)
-    static int MIN_VALUE
-    static int MAX_VALUE</pre><pre class="screen">Iterator extends Object
-    boolean hasNext()
-    def next()
-    void remove()</pre><pre class="screen">Iterator&lt;String&gt; extends Object
-    boolean hasNext()
-    String next()
-    void remove()</pre><pre class="screen">List extends Collection
-    def set(int, def)
-    def get(int)
-    def remove(int)</pre><pre class="screen">List&lt;Object&gt; extends Collection
-    Object set(int, Object)
-    Object get(int)
-    Object remove(int)</pre><pre class="screen">List&lt;String&gt; extends Collection
-    String set(int, String)
-    String get(int)
-    String remove(int)</pre><pre class="screen">Long extends Number
-    &lt;init&gt;(long)
-    static Long valueOf(long)
-    static long MIN_VALUE
-    static long MAX_VALUE</pre><pre class="screen">Map extends Object
-    def put (def, def)
-    def get (def)
-    def remove (def)
-    boolean isEmpty()
-    int size()
-    boolean containsKey(def)
-    boolean containsValue(def)
-    Set keySet()
-    Collection values()</pre><pre class="screen">Map&lt;Object,Object&gt; extends Object
-    Object put (Object, Object)
-    Object get (Object)
-    Object remove (Object)
-    boolean isEmpty()
-    int size()
-    boolean containsKey(Object)
-    boolean containsValue(Object)
-    Set keySet()
-    Collection values()</pre><pre class="screen">Map&lt;String,def&gt; extends Object
-    def put (String, def)
-    def get (String)
-    def remove (String)
-    boolean isEmpty()
-    int size()
-    boolean containsKey(String)
-    boolean containsValue(def)
-    Set&lt;String&gt; keySet()
-    Collection values()</pre><pre class="screen">Map&lt;String,Object&gt; extends Object
-    Object put (String, Object)
-    Object get (String)
-    Object remove (String)
-    boolean isEmpty()
-    int size()
-    boolean containsKey(String)
-    boolean containsValue(Object)
-    Set&lt;String&gt; keySet()
-    Collection values()</pre><pre class="screen">Number extends Object
-    short shortValue()
-    short shortValue()
-    int intValue()
-    long longValue()
-    float floatValue()
-    double doubleValue()</pre><pre class="screen">Object
-    String toString()
-    boolean equals(Object)
-    int hashCode()</pre><pre class="screen">Set extends Collection</pre><pre class="screen">Set&lt;Object&gt; extends Collection&lt;Object&gt;</pre><pre class="screen">Set&lt;String&gt; extends Collection&lt;String&gt;</pre><pre class="screen">Short extends Number
-    &lt;init&gt;(short)
-    static Short valueOf(short)
-    static short MIN_VALUE
-    static short MAX_VALUE</pre><pre class="screen">String extends CharSequence
-    &lt;init&gt;(String)
-    int codePointAt(int)
-    int compareTo(String)
-    String concat(String)
-    boolean endsWith(String)
-    int indexOf(String, int)
-    boolean isEmpty()
-    String replace(CharSequence, CharSequence)
-    boolean startsWith(String)
-    String substring(int, int)
-    char[] toCharArray()
-    String trim()</pre><pre class="screen">NumberFormatException extends Exception
-    &lt;init&gt;()</pre><pre class="screen">Void extends Object</pre><h4><a id="_utility_classes"></a>Utility Classes<a href="https://github.com/elastic/elasticsearch/edit/master/docs/reference/modules/scripting/painless.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h4><pre class="screen">Math
-   static double abs(double)
-   static float fabs(float)
-   static long labs(long)
-   static int iabs(int)
-   static double acos(double)
-   static double asin(double)
-   static double atan(double)
-   static double atan2(double)
-   static double cbrt(double)
-   static double ceil(double)
-   static double cos(double)
-   static double cosh(double)
-   static double exp(double)
-   static double expm1(double)
-   static double floor(double)
-   static double hypt(double, double)
-   static double abs(double)
-   static double log(double)
-   static double log10(double)
-   static double log1p(double)
-   static double max(double, double)
-   static float fmax(float, float)
-   static long lmax(long, long)
-   static int imax(int, int)
-   static double min(double, double)
-   static float fmin(float, float)
-   static long lmin(long, long)
-   static int imin(int, int)
-   static double pow(double, double)
-   static double random()
-   static double rint(double)
-   static long round(double)
-   static double sin(double)
-   static double sinh(double)
-   static double sqrt(double)
-   static double tan(double)
-   static double tanh(double)
-   static double toDegrees(double)
-   static double toRadians(double)</pre><pre class="screen">Utility
-   static boolean NumberToboolean(Number)
-   static char NumberTochar(Number)
-   static Boolean NumberToBoolean(Number)
-   static Short NumberToShort(Number)
-   static Character NumberToCharacter(Number)
-   static Integer NumberToInteger(Number)
-   static Long NumberToLong(Number)
-   static Float NumberToFloat(Number)
-   static Double NumberToDouble(Number)
-   static byte booleanTobyte(boolean)
-   static short booleanToshort(boolean)
-   static char booleanTochar(boolean)
-   static int booleanToint(boolean)
-   static long booleanTolong(boolean)
-   static float booleanTofloat(boolean)
-   static double booleanTodouble(boolean)
-   static Integer booleanToInteger(boolean)
-   static byte BooleanTobyte(Boolean)
-   static short BooleanToshort(Boolean)
-   static char BooleanTochar(Boolean)
-   static int BooleanToint(Boolean)
-   static long BooleanTolong(Boolean)
-   static float BooleanTofloat(Boolean)
-   static double BooleanTodouble(Boolean)
-   static Byte BooleanToByte(Boolean)
-   static Short BooleanToShort(Boolean)
-   static Character BooleanToCharacter(Boolean)
-   static Integer BooleanToInteger(Boolean)
-   static Long BooleanToLong(Boolean)
-   static Float BooleanToFloat(Boolean)
-   static Double BooleanToDouble(Boolean)
-   static boolean byteToboolean(byte)
-   static Short byteToShort(byte)
-   static Character byteToCharacter(byte)
-   static Integer byteToInteger(byte)
-   static Long byteToLong(byte)
-   static Float byteToFloat(byte)
-   static Double byteToDouble(byte)
-   static boolean ByteToboolean(Byte)
-   static char ByteTochar(Byte)
-   static boolean shortToboolean(short)
-   static Byte shortToByte(short)
-   static Character shortToCharacter(short)
-   static Integer shortToInteger(short)
-   static Long shortToLong(short)
-   static Float shortToFloat(short)
-   static Double shortToDouble(short)
-   static boolean ShortToboolean(Short)
-   static char ShortTochar(Short)
-   static boolean charToboolean(char)
-   static Byte charToByte(char)
-   static Short charToShort(char)
-   static Integer charToInteger(char)
-   static Long charToLong(char)
-   static Float charToFloat(char)
-   static Double charToDouble(char)
-   static boolean CharacterToboolean(Character)
-   static byte CharacterTobyte(Character)
-   static short CharacterToshort(Character)
-   static int CharacterToint(Character)
-   static long CharacterTolong(Character)
-   static float CharacterTofloat(Character)
-   static double CharacterTodouble(Character)
-   static Boolean CharacterToBoolean(Character)
-   static Byte CharacterToByte(Character)
-   static Short CharacterToShort(Character)
-   static Integer CharacterToInteger(Character)
-   static Long CharacterToLong(Character)
-   static Float CharacterToFloat(Character)
-   static Double CharacterToDouble(Character)
-   static boolean intToboolean(int)
-   static Byte intToByte(int)
-   static Short intToShort(int)
-   static Character intToCharacter(int)
-   static Long intToLong(int)
-   static Float intToFloat(int)
-   static Double intToDouble(int)
-   static boolean IntegerToboolean(Integer)
-   static char IntegerTochar(Integer)
-   static boolean longToboolean(long)
-   static Byte longToByte(long)
-   static Short longToShort(long)
-   static Character longToCharacter(long)
-   static Integer longToInteger(long)
-   static Float longToFloat(long)
-   static Double longToDouble(long)
-   static boolean LongToboolean(Long)
-   static char LongTochar(Long)
-   static boolean floatToboolean(float)
-   static Byte floatToByte(float)
-   static Short floatToShort(float)
-   static Character floatToCharacter(float)
-   static Integer floatToInteger(float)
-   static Long floatToLong(float)
-   static Double floatToDouble(float)
-   static boolean FloatToboolean(Float)
-   static char FloatTochar(Float)
-   static boolean doubleToboolean(double)
-   static Byte doubleToByte(double)
-   static Short doubleToShort(double)
-   static Character doubleToCharacter(double)
-   static Integer doubleToInteger(double)
-   static Long doubleToLong(double)
-   static Float doubleToFloat(double)
-   static boolean DoubleToboolean(Double)
-   static char DoubleTochar(Double)</pre><pre class="screen">Def
-    static boolean defToboolean(def)
-    static byte defTobyte(def)
-    static short defToshort(def)
-    static char defTochar(def)
-    static int defToint(def)
-    static long defTolong(def)
-    static float defTofloat(def)
-    static double defTodouble(def)
-    static Boolean defToBoolean(def)
-    static Byte defToByte(def)
-    static Character defToCharacter(def)
-    static Integer defToInteger(def)
-    static Long defToLong(def)
-    static Float defToFloat(def)
-    static Double defToDouble(def)</pre></div><div class="navfooter"><span class="prev"><a href="modules-scripting-groovy.html">
+<a class="ulink" href="https://docs.oracle.com/javase/8/docs/api/java/time/zone/package-summary.html" target="_top">java.time.zone</a>
+</li><li class="listitem">
+<a class="ulink" href="https://docs.oracle.com/javase/8/docs/api/java/util/package-summary.html" target="_top">java.util</a>
+</li><li class="listitem">
+<a class="ulink" href="https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html" target="_top">java.util.function</a>
+</li><li class="listitem">
+<a class="ulink" href="https://docs.oracle.com/javase/8/docs/api/java/util/regex/package-summary.html" target="_top">java.util.regex</a>
+</li><li class="listitem">
+<a class="ulink" href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html" target="_top">java.util.stream</a>
+</li></ul></div><p>Note that unsafe classes and methods are not included, there is no support for:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+Manipulation of processes and threads
+</li><li class="listitem">
+Input/Output
+</li><li class="listitem">
+Reflection
+</li></ul></div></div><div class="navfooter"><span class="prev"><a href="modules-scripting-groovy.html">
               « 
               Groovy Scripting Language</a>
            
         </span><span class="next">
            
-          <a href="modules-scripting-expression.html">Lucene Expressions Language
+          <a href="modules-scripting-painless-syntax.html">Painless Syntax
                »
             </a></span></div>
 <!-- end body -->
 
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4" id="right_col">
-        <div id="rtpcontainer" style="display: block;"><h3>Top Videos</h3><ul><li><a href="https://www.elastic.co/webinars/elasticsearch-2-0-overview?baymax=default&elektra=docs&storm=top-video">Getting Started</a></li><li><a href="http://www.elastic.co/webinars/elasticsearch-performance-optimization-tale-two-tickets/?elektra=docs">Scaling</a></li><li><a href="http://www.elastic.co/webinars/shield-securing-your-data-in-elasticsearch/?elektra=docs">Security</a></li></ul></div></div></div></div></section></div><div id="footer-subscribe"><div class="subscribe-wrapper"><div class="container"><div class="subscribe-form-container"><div class="subscribe-title"><h5>Be in the know with the latest and greatest from Elastic.</h5></div><div class="subscribe-form"><form id="mktoForm_1398" class="mktoForm sb-form"></form></div></div><div class="form_thanks hide"><p>Thanks for subscribing! We'll keep you updated with new releases.</p></div></div></div></div><footer class="footer-wrapper"><div class="container"><div class="row footer-content"><div class="col-xs-6 col-sm-3 col-md-3"><h3><a href="/products">Products ></a></h3><ul><li><a href="/products/elasticsearch">Elasticsearch</a></li><li><a href="/products/kibana">Kibana</a></li><li><a href="/products/logstash">Logstash</a></li><li><a href="/products/beats">Beats</a></li><li><a href="/cloud">Elastic Cloud</a></li><li><a href="/products/shield">Shield (Security)</a></li><li><a href="/products/watcher">Watcher (Alerting)</a></li><li><a href="/products/marvel">Marvel (Monitoring)</a></li><li><a href="/products/graph">Graph</a></li><li><a href="/products/hadoop">ES-Hadoop</a></li></ul></div><div class="col-xs-6 col-sm-3 col-md-3"><h3>Resources</h3><ul><li><a href="/blog">Blog</a></li><li><a href="/community">Community</a></li><li><a href="/use-cases">Customers & Use Cases</a></li><li><a href="/guide">Documentation</a></li><li><a href="/elasticon">Elastic{ON} Events</a></li><li><a href="https://discuss.elastic.co/" target="_blank">Forums</a></li><li><a href="/community/meetups">Meetups</a></li><li><a href="/subscriptions">Subscriptions</a></li><li><a href="https://support.elastic.co" target="_blank">Support Portal</a></li><li><a href="/videos">Videos & Webinars</a></li><li><a href="/training">Training</a></li></ul></div><div class="col-xs-6 col-sm-3 col-md-3"><h3><a href="/about">About ></a></h3><ul><li><a href="/about/careers">Careers</a></li><li><a href="/contact">Contact</a></li><li><a href="/about/leadership">Leadership</a></li><li><a href="/about/partners">Partners</a></li><li><a href="/about/press">Press</a></li></ul></div><div class="col-xs-6 col-sm-3 col-md-3"><h3>Language</h3><ul><li><a href="/">English</a></li><li><a href="/fr">Français</a></li><li><a href="/de">Deutsch</a></li><li><a href="/jp">日本語</a></li><li><a href="/kr">한국어</a></li></ul></div></div><div class="row social-icon"><div class="col-xs-12 col-sm-12 col-md-12"><ul><li class="facebook"><a target="_blank" id="footer_facebook" href="http://www.facebook.com/elastic.co" target="_blank"></a></li><li class="twitter"><a target="_blank" id="footer_twitter" href="https://www.twitter.com/elastic" target="_blank"></a></li><li class="linkedin"><a target="_blank" id="footer_linkedin" href="https://www.linkedin.com/company/elastic-co" target="_blank"></a></li><li class="xing"><a target="_blank" id="footer_xing" href="https://www.xing.com/companies/elastic.co" target="_blank"></a></li><li class="youtube"><a target="_blank" id="footer_youtube" href="https://www.youtube.com/user/elasticsearch" target="_blank"></a></li></ul></div></div><div class="row"><div class="col-xs-12 col-sm-12 col-md-12"><div class="copyright"><ul><li><a href="/legal/trademarks">Trademarks</a></li><li><a href="/legal/terms-of-use">Terms of Use</a></li><li><a href="/legal/privacy-policy">Privacy</a></li><li><a href="/legal/privacy-and-cookie-policy">Cookie Policy</a></li><li><a href="/brand">Brand</a></li></ul><div class="copyright-content"><div class="footer-logo"><a href="/"><img src="/static/images/svg/logo-elastic-footer.svg" class="img-responsive"></a></div><div class="footer-text"><p>© 2016. All Rights Reserved - Elasticsearch</p><p>Elasticsearch is a trademark of Elasticsearch BV, registered in the U.S. and in other countries</p><p>Apache, Apache Lucene, Apache Hadoop, Hadoop, HDFS and the yellow elephant logo are trademarks of the <a href="http://www.apache.org/" target="_blank">Apache Software Foundation</a> in the United States and/or other countries.</p></div></div></div></div></div></div></footer><style type="text/css">
+        
+					<div id="rtpcontainer" style="display: block;">
+						<h3>Top Videos</h3>
+						<ul>
+							<li><a href="https://www.elastic.co/webinars/elasticsearch-2-0-overview?baymax=default&elektra=docs&storm=top-video">Getting Started</a></li>
+							<li><a href="http://www.elastic.co/webinars/elasticsearch-performance-optimization-tale-two-tickets/?elektra=docs">Scaling</a></li>
+							<li><a href="http://www.elastic.co/webinars/shield-securing-your-data-in-elasticsearch/?elektra=docs">Security</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+        </div>
+      	
+
+
+<div id="footer-subscribe">
+  <div class="subscribe-wrapper">
+    <div class="container">
+      <div class="subscribe-form-container">
+        <div class="subscribe-title">
+            <h5>Be in the know with the latest and greatest from Elastic.</h5>
+        </div>
+        <div class="subscribe-form">
+          <form id="mktoForm_1398" class="mktoForm sb-form"></form>
+        </div>
+      </div>
+      <div class="form_thanks hide">
+        
+          <p>Thanks for subscribing! We'll keep you updated with new releases.</p>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<!--subscribe newsletter end-->
+
+<!-- Footer Section -->
+<footer class="footer-wrapper">
+  <div class="container">
+    <div class="row footer-content">
+        
+          <div class="col-xs-6 col-sm-3 col-md-3">
+              
+                <h3><a href="/products">Products ></a></h3>
+              
+              <ul>
+              
+                
+                  
+                    <li><a href="/products/elasticsearch">Elasticsearch</a></li>
+                  
+                
+              
+                
+                  
+                    <li><a href="/products/kibana">Kibana</a></li>
+                  
+                
+              
+                
+                  
+                    <li><a href="/products/logstash">Logstash</a></li>
+                  
+                
+              
+                
+                  
+                    <li><a href="/products/beats">Beats</a></li>
+                  
+                
+              
+                
+                  
+                    <li><a href="/cloud">Elastic Cloud</a></li>
+                  
+                
+              
+                
+                  
+                    <li><a href="/products/shield">Shield (Security)</a></li>
+                  
+                
+              
+                
+                  
+                    <li><a href="/products/watcher">Watcher (Alerting)</a></li>
+                  
+                
+              
+                
+                  
+                    <li><a href="/products/marvel">Marvel (Monitoring)</a></li>
+                  
+                
+              
+                
+                  
+                    <li><a href="/products/graph">Graph</a></li>
+                  
+                
+              
+                
+                  
+                    <li><a href="/products/hadoop">ES-Hadoop</a></li>
+                  
+                
+              
+              </ul>
+          </div>    
+      
+          <div class="col-xs-6 col-sm-3 col-md-3">
+              
+                <h3>Resources</h3>
+              
+              <ul>
+              
+                
+                  
+                    <li><a href="/blog">Blog</a></li>
+                  
+                
+              
+                
+                  
+                    <li><a href="/community">Community</a></li>
+                  
+                
+              
+                
+                  
+                    <li><a href="/use-cases">Customers & Use Cases</a></li>
+                  
+                
+              
+                
+                  
+                    <li><a href="/guide">Documentation</a></li>
+                  
+                
+              
+                
+                  
+                    <li><a href="/elasticon">Elastic{ON} Events</a></li>
+                  
+                
+              
+                
+                  
+                    <li><a href="https://discuss.elastic.co/" target="_blank">Forums</a></li>
+                  
+                
+              
+                
+                  
+                    <li><a href="/community/meetups">Meetups</a></li>
+                  
+                
+              
+                
+                  
+                    <li><a href="/subscriptions">Subscriptions</a></li>
+                  
+                
+              
+                
+                  
+                    <li><a href="https://support.elastic.co" target="_blank">Support Portal</a></li>
+                  
+                
+              
+                
+                  
+                    <li><a href="/videos">Videos & Webinars</a></li>
+                  
+                
+              
+                
+                  
+                    <li><a href="/training">Training</a></li>
+                  
+                
+              
+              </ul>
+          </div>    
+      
+          <div class="col-xs-6 col-sm-3 col-md-3">
+              
+                <h3><a href="/about">About ></a></h3>
+              
+              <ul>
+              
+                
+                  
+                    <li><a href="/about/careers">Careers/Jobs</a></li>
+                  
+                
+              
+                
+                  
+                    <li><a href="/contact">Contact</a></li>
+                  
+                
+              
+                
+                  
+                    <li><a href="/about/leadership">Leadership</a></li>
+                  
+                
+              
+                
+                  
+                    <li><a href="/about/partners">Partners</a></li>
+                  
+                
+              
+                
+                  
+                    <li><a href="/about/press">Press</a></li>
+                  
+                
+              
+              </ul>
+          </div>    
+      
+          <div class="col-xs-6 col-sm-3 col-md-3">
+              
+                <h3>Language</h3>
+              
+              <ul>
+              
+                
+                  <li><a href="/">English</a></li>
+                
+              
+                
+                  <li><a href="/fr/">Français</a></li>
+                
+              
+                
+                  <li><a href="/de/">Deutsch</a></li>
+                
+              
+                
+                  <li><a href="/jp/">日本語</a></li>
+                
+              
+                
+                  <li><a href="/kr/">한국어</a></li>
+                
+              
+              </ul>
+          </div>    
+       
+    </div>
+     <!-- Social Media Section -->
+    <div class="row social-icon">
+      <div class="col-xs-12 col-sm-12 col-md-12">
+        <ul>
+          
+          <li class="facebook"><a target="_blank" id="footer_facebook" href="http://www.facebook.com/elastic.co" target="_blank"></a></li>
+          
+          <li class="twitter"><a target="_blank" id="footer_twitter" href="https://www.twitter.com/elastic" target="_blank"></a></li>
+          
+          <li class="linkedin"><a target="_blank" id="footer_linkedin" href="https://www.linkedin.com/company/elastic-co" target="_blank"></a></li>
+          
+          <li class="xing"><a target="_blank" id="footer_xing" href="https://www.xing.com/companies/elastic.co" target="_blank"></a></li>
+          
+          <li class="youtube"><a target="_blank" id="footer_youtube" href="https://www.youtube.com/user/elasticsearch" target="_blank"></a></li>
+          
+        </ul>
+      </div>
+    </div>
+    <!-- Social Media Section end-->
+    <div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12">
+		<div class="copyright">
+			<ul>
+				<li><a href="/legal/trademarks">Trademarks</a></li>
+				<li><a href="/legal/terms-of-use">Terms of Use</a></li>
+				<li><a href="/legal/privacy-policy">Privacy</a></li>
+				<li><a href="/legal/privacy-and-cookie-policy">Cookie Policy</a></li>
+				<li><a href="/brand">Brand</a></li>
+			</ul>
+			<div class="copyright-content">
+				<div class="footer-logo"><a href="/"><img src="/static/images/svg/logo-elastic-footer.svg" class="img-responsive"></a>
+				</div>
+				<div class="footer-text">
+					<p>© 2016. All Rights Reserved - Elasticsearch
+					</p>
+					<p>Elasticsearch is a trademark of Elasticsearch BV, registered in the U.S. and in other countries
+					</p>
+					<p>Apache, Apache Lucene, Apache Hadoop, Hadoop, HDFS and the yellow elephant logo are trademarks of the <a href="http://www.apache.org/" target="_blank">Apache Software Foundation</a> in the United States and/or other countries.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+  </div>
+</footer>
+<!-- Footer Section end-->
+
+<style type="text/css">
 	
     
-		.facebook{background:url("https://stag-static-www.elastic.co/assets/bltf546ff2e0a8f2de5/facebook.svg?q=266") no-repeat;}
+		.facebook{background:url("https://stag-static-www.elastic.co/assets/bltf546ff2e0a8f2de5/facebook.svg?q=852") no-repeat;}
     
     
-      .facebook:hover {background:url("https://stag-static-www.elastic.co/assets/bltc24cf11c714ecfc4/facebook-hover.svg?q=266")}		
-    
-	
-    
-		.twitter{background:url("https://stag-static-www.elastic.co/assets/bltdd9556d6b24e2b85/twitter.svg?q=266") no-repeat;}
-    
-    
-      .twitter:hover {background:url("https://stag-static-www.elastic.co/assets/blt90b0372cc07a54d3/twitter-hover.svg?q=266")}		
+      .facebook:hover {background:url("https://stag-static-www.elastic.co/assets/bltc24cf11c714ecfc4/facebook-hover.svg?q=852")}		
     
 	
     
-		.linkedin{background:url("https://stag-static-www.elastic.co/assets/bltc4a77e0f52ce07f1/linkedin.svg?q=266") no-repeat;}
+		.twitter{background:url("https://stag-static-www.elastic.co/assets/bltdd9556d6b24e2b85/twitter.svg?q=852") no-repeat;}
     
     
-      .linkedin:hover {background:url("https://stag-static-www.elastic.co/assets/blt01ce654380e4ea6c/linkedin-hover.svg?q=266")}		
-    
-	
-    
-		.xing{background:url("https://stag-static-www.elastic.co/assets/bltc6347078dcc9ec76/xing.svg?q=266") no-repeat;}
-    
-    
-      .xing:hover {background:url("https://stag-static-www.elastic.co/assets/bltededebe5f7521a39/xing-hover.svg?q=266")}		
+      .twitter:hover {background:url("https://stag-static-www.elastic.co/assets/blt90b0372cc07a54d3/twitter-hover.svg?q=852")}		
     
 	
     
-		.youtube{background:url("https://stag-static-www.elastic.co/assets/blt4982061ce1aebc7f/youtube.svg?q=266") no-repeat;}
+		.linkedin{background:url("https://stag-static-www.elastic.co/assets/bltc4a77e0f52ce07f1/linkedin.svg?q=852") no-repeat;}
     
     
-      .youtube:hover {background:url("https://stag-static-www.elastic.co/assets/bltddeb6c6404ae81a5/youtube-hover.svg?q=266")}		
+      .linkedin:hover {background:url("https://stag-static-www.elastic.co/assets/blt01ce654380e4ea6c/linkedin-hover.svg?q=852")}		
     
 	
-</style><script src="//app-lon02.marketo.com/js/forms2/js/forms2.min.js"></script><script>
+    
+		.xing{background:url("https://stag-static-www.elastic.co/assets/bltc6347078dcc9ec76/xing.svg?q=852") no-repeat;}
+    
+    
+      .xing:hover {background:url("https://stag-static-www.elastic.co/assets/bltededebe5f7521a39/xing-hover.svg?q=852")}		
+    
+	
+    
+		.youtube{background:url("https://stag-static-www.elastic.co/assets/blt4982061ce1aebc7f/youtube.svg?q=852") no-repeat;}
+    
+    
+      .youtube:hover {background:url("https://stag-static-www.elastic.co/assets/bltddeb6c6404ae81a5/youtube-hover.svg?q=852")}		
+    
+	
+</style>
+
+<script src="//app-lon02.marketo.com/js/forms2/js/forms2.min.js"></script>
+<script>
   MktoForms2.whenReady(function (form) {
   //    // Put your code that uses the form object here
   //   $('#Email').attr("placeholder","Email Address");
@@ -679,11 +1082,25 @@ Generic types with unspecified generic parameters are parameters of type <code c
         return false;
       });
   });
-</script></section></div><script type="text/javascript">
+</script>
+      </section>
+    </div>
+     <script type="text/javascript">
 	var suggestionsUrl = "https://search.elastic.co/suggest";	
-</script><script src="https://stag-static-www.elastic.co/static/js/jquery.autocomplete.js?q=266"></script><script src="https://stag-static-www.elastic.co/static/js/jquery.cookie.js?q=266"></script><script type="text/javascript" src="https://stag-static-www.elastic.co/static/js/slick.min.js?q=266"></script><script src="https://stag-static-www.elastic.co/static/js/nav-v5.js?q=266"></script><script src="https://stag-static-www.elastic.co/static/js/script.js?q=266"></script><style></style>
+	var localeUrl = '{"relative_url_prefix":"/","code":"en-us","url":"/guide_template"}';
+</script>
+<script src="https://stag-static-www.elastic.co/static/js/jquery.autocomplete.js?q=852"></script>
+<script src="https://stag-static-www.elastic.co/static/js/jquery.cookie.js?q=852"></script>
+<script type="text/javascript" src="https://stag-static-www.elastic.co/static/js/slick.min.js?q=852"></script>
+<script src="https://stag-static-www.elastic.co/static/js/nav-v5.js?q=852"></script>
+<script src="https://stag-static-www.elastic.co/static/js/script.js?q=852"></script> 
+     
+     <style></style>
+     
+  
             <script type="text/javascript" src="docs.js"></script>
 <script type='text/javascript' src='https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=yaml'></script>
 
             </body>
-        </html>
+        
+</html>
