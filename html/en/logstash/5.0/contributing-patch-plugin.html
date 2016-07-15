@@ -72,12 +72,12 @@
 	   
 
     <!-- css -->
-    <link href="https://stag-static-www.elastic.co/static/css/main.css?q=852" rel="stylesheet">
+    <link href="https://stag-static-www.elastic.co/static/css/main.css?q=110" rel="stylesheet">
     
     
 
-    <script src="https://stag-static-www.elastic.co/static/js/jquery.min.js?q=852"></script>
-    <script src="https://stag-static-www.elastic.co/static/js/bootstrap.min.js?q=852"></script>
+    <script src="https://stag-static-www.elastic.co/static/js/jquery.min.js?q=110"></script>
+    <script src="https://stag-static-www.elastic.co/static/js/bootstrap.min.js?q=110"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -87,7 +87,7 @@
     <![endif]-->
 
 	
-	<link type="text/css" rel="stylesheet" href="https://stag-static-www.elastic.co/static/css/guide.css?q=852" />
+	<link type="text/css" rel="stylesheet" href="https://stag-static-www.elastic.co/static/css/guide.css?q=110" />
 
 
   
@@ -157,7 +157,7 @@
           <div class="navbar-brand" id="elastic">
             <h1>
               <a class="logo-m hidden-sm hidden-md hidden-lg" href="/">
-                <img src="https://stag-static-www.elastic.co/assets/bltd5ac38b4549d53de/elastic-logo-mobile (1).svg?q=852" alt="elastic-logo-mobile">
+                <img src="https://stag-static-www.elastic.co/assets/bltd5ac38b4549d53de/elastic-logo-mobile (1).svg?q=110" alt="elastic-logo-mobile">
               </a>
             </h1>
           </div>
@@ -206,7 +206,7 @@
       <div class="navbar-brand hidden-xs" id="elastic">
         <h1>
           <a class="hidden-xs" id="elastic-logo" href="/">
-            <img src="https://stag-static-www.elastic.co/assets/blt6050efb80ceabd47/elastic-logo (2).svg?q=852" alt="elastic-logo">
+            <img src="https://stag-static-www.elastic.co/assets/blt6050efb80ceabd47/elastic-logo (2).svg?q=110" alt="elastic-logo">
           </a>
         </h1>
       </div>
@@ -343,15 +343,15 @@
 <style> 
     
       .m-shortcuts li a.m-search {
-        background: url("https://stag-static-www.elastic.co/assets/blt7b9c4fe6528dc4ef/m-search-icon.png?q=852") no-repeat scroll center center rgba(0, 0, 0, 0);
+        background: url("https://stag-static-www.elastic.co/assets/blt7b9c4fe6528dc4ef/m-search-icon.png?q=110") no-repeat scroll center center rgba(0, 0, 0, 0);
         background-size: contain;}
     
       .m-shortcuts li a.m-docs {
-        background: url("https://stag-static-www.elastic.co/assets/blt44d8b7530a76d01c/m-guide-icon.png?q=852") no-repeat scroll center center rgba(0, 0, 0, 0);
+        background: url("https://stag-static-www.elastic.co/assets/blt44d8b7530a76d01c/m-guide-icon.png?q=110") no-repeat scroll center center rgba(0, 0, 0, 0);
         background-size: contain;}
     
       .m-shortcuts li a.m-contact {
-        background: url("https://stag-static-www.elastic.co/assets/blt878040795c9d083b/m-contact-icon.png?q=852") no-repeat scroll center center rgba(0, 0, 0, 0);
+        background: url("https://stag-static-www.elastic.co/assets/blt878040795c9d083b/m-contact-icon.png?q=110") no-repeat scroll center center rgba(0, 0, 0, 0);
         background-size: contain;}
     
     
@@ -515,7 +515,7 @@ The default value
 Any required flags
 </li></ul></div><p>Plugins are subclasses of a Logstash base class. A plugin’s base class defines common configuration and methods.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_input_plugins"></a>Input Plugins<a href="https://github.com/elastic/logstash/edit/master/docs/static/contributing-patch.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h3></div></div></div><p>Input plugins ingest data from an external source. Input plugins are always associated with a codec. An input plugin
 always has an associated codec plugin. Input and codec plugins operate in conjuction to create a Logstash event and add
-that event to the processing queue. An input codec is a subclass of the <code class="literal">LogStash::Inputs::Base</code> class.</p><div class="horizontal"><a id="id-1.15.19.6.3"></a><p class="title"><strong>Table 1. Input API</strong></p><div class="horizontal-contents"><table summary="Input API" cellpadding="4px" border="0"><colgroup><col /><col /></colgroup><tbody valign="top"><tr><td valign="top">
+that event to the processing queue. An input codec is a subclass of the <code class="literal">LogStash::Inputs::Base</code> class.</p><div class="horizontal"><a id="id-1.16.19.6.3"></a><p class="title"><strong>Table 1. Input API</strong></p><div class="horizontal-contents"><table summary="Input API" cellpadding="4px" border="0"><colgroup><col /><col /></colgroup><tbody valign="top"><tr><td valign="top">
 <p>
 <code class="literal">#register() -&gt; nil</code>
 </p>
@@ -543,7 +543,7 @@ receive batched data to minimize the external call overhead.
 Optional. Stops external connections and cleans up.
 </p>
 </td></tr></tbody></table></div></div><br class="horizontal-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_codec_plugins"></a>Codec Plugins<a href="https://github.com/elastic/logstash/edit/master/docs/static/contributing-patch.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h3></div></div></div><p>Codec plugins decode input data that has a specific structure, such as JSON input data. A codec plugin is a subclass of
-<code class="literal">LogStash::Codecs::Base</code>.</p><div class="horizontal"><a id="id-1.15.19.7.3"></a><p class="title"><strong>Table 2. Codec API</strong></p><div class="horizontal-contents"><table summary="Codec API" cellpadding="4px" border="0"><colgroup><col /><col /></colgroup><tbody valign="top"><tr><td valign="top">
+<code class="literal">LogStash::Codecs::Base</code>.</p><div class="horizontal"><a id="id-1.16.19.7.3"></a><p class="title"><strong>Table 2. Codec API</strong></p><div class="horizontal-contents"><table summary="Codec API" cellpadding="4px" border="0"><colgroup><col /><col /></colgroup><tbody valign="top"><tr><td valign="top">
 <p>
 <code class="literal">#register() -&gt; nil</code>
 </p>
@@ -571,7 +571,7 @@ errors. This method calls a block that was previously stored as @on_event with t
 data object.
 </p>
 </td></tr></tbody></table></div></div><br class="horizontal-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_filter_plugins"></a>Filter Plugins<a href="https://github.com/elastic/logstash/edit/master/docs/static/contributing-patch.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h3></div></div></div><p>A mechanism to change, mutate or merge one or more Events. A filter plugin is a subclass of the <code class="literal">LogStash::Filters::Base</code>
-class.</p><div class="horizontal"><a id="id-1.15.19.8.3"></a><p class="title"><strong>Table 3. Filter API</strong></p><div class="horizontal-contents"><table summary="Filter API" cellpadding="4px" border="0"><colgroup><col /><col /></colgroup><tbody valign="top"><tr><td valign="top">
+class.</p><div class="horizontal"><a id="id-1.16.19.8.3"></a><p class="title"><strong>Table 3. Filter API</strong></p><div class="horizontal-contents"><table summary="Filter API" cellpadding="4px" border="0"><colgroup><col /><col /></colgroup><tbody valign="top"><tr><td valign="top">
 <p>
 <code class="literal">#register() -&gt; nil</code>
 </p>
@@ -588,7 +588,7 @@ Identical to the API of the same name for input plugins.
 Required. May handle errors. Used to apply a mutation function to the given event.
 </p>
 </td></tr></tbody></table></div></div><br class="horizontal-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="_output_plugins"></a>Output Plugins<a href="https://github.com/elastic/logstash/edit/master/docs/static/contributing-patch.asciidoc" class="edit_me" title="Edit this page on GitHub" rel="nofollow">edit</a></h3></div></div></div><p>A mechanism to send an event to an external destination. This process may require serialization. An output plugin is a
-subclass of the <code class="literal">LogStash::Outputs::Base</code> class.</p><div class="horizontal"><a id="id-1.15.19.9.3"></a><p class="title"><strong>Table 4. Output API</strong></p><div class="horizontal-contents"><table summary="Output API" cellpadding="4px" border="0"><colgroup><col /><col /></colgroup><tbody valign="top"><tr><td valign="top">
+subclass of the <code class="literal">LogStash::Outputs::Base</code> class.</p><div class="horizontal"><a id="id-1.16.19.9.3"></a><p class="title"><strong>Table 4. Output API</strong></p><div class="horizontal-contents"><table summary="Output API" cellpadding="4px" border="0"><colgroup><col /><col /></colgroup><tbody valign="top"><tr><td valign="top">
 <p>
 <code class="literal">#register() -&gt; nil</code>
 </p>
@@ -1160,38 +1160,38 @@ merge and publish a new version of the plugin.</p></div></div><div class="navfoo
 <style type="text/css">
 	
     
-		.facebook{background:url("https://stag-static-www.elastic.co/assets/bltf546ff2e0a8f2de5/facebook.svg?q=852") no-repeat;}
+		.facebook{background:url("https://stag-static-www.elastic.co/assets/bltf546ff2e0a8f2de5/facebook.svg?q=110") no-repeat;}
     
     
-      .facebook:hover {background:url("https://stag-static-www.elastic.co/assets/bltc24cf11c714ecfc4/facebook-hover.svg?q=852")}		
-    
-	
-    
-		.twitter{background:url("https://stag-static-www.elastic.co/assets/bltdd9556d6b24e2b85/twitter.svg?q=852") no-repeat;}
-    
-    
-      .twitter:hover {background:url("https://stag-static-www.elastic.co/assets/blt90b0372cc07a54d3/twitter-hover.svg?q=852")}		
+      .facebook:hover {background:url("https://stag-static-www.elastic.co/assets/bltc24cf11c714ecfc4/facebook-hover.svg?q=110")}		
     
 	
     
-		.linkedin{background:url("https://stag-static-www.elastic.co/assets/bltc4a77e0f52ce07f1/linkedin.svg?q=852") no-repeat;}
+		.twitter{background:url("https://stag-static-www.elastic.co/assets/bltdd9556d6b24e2b85/twitter.svg?q=110") no-repeat;}
     
     
-      .linkedin:hover {background:url("https://stag-static-www.elastic.co/assets/blt01ce654380e4ea6c/linkedin-hover.svg?q=852")}		
-    
-	
-    
-		.xing{background:url("https://stag-static-www.elastic.co/assets/bltc6347078dcc9ec76/xing.svg?q=852") no-repeat;}
-    
-    
-      .xing:hover {background:url("https://stag-static-www.elastic.co/assets/bltededebe5f7521a39/xing-hover.svg?q=852")}		
+      .twitter:hover {background:url("https://stag-static-www.elastic.co/assets/blt90b0372cc07a54d3/twitter-hover.svg?q=110")}		
     
 	
     
-		.youtube{background:url("https://stag-static-www.elastic.co/assets/blt4982061ce1aebc7f/youtube.svg?q=852") no-repeat;}
+		.linkedin{background:url("https://stag-static-www.elastic.co/assets/bltc4a77e0f52ce07f1/linkedin.svg?q=110") no-repeat;}
     
     
-      .youtube:hover {background:url("https://stag-static-www.elastic.co/assets/bltddeb6c6404ae81a5/youtube-hover.svg?q=852")}		
+      .linkedin:hover {background:url("https://stag-static-www.elastic.co/assets/blt01ce654380e4ea6c/linkedin-hover.svg?q=110")}		
+    
+	
+    
+		.xing{background:url("https://stag-static-www.elastic.co/assets/bltc6347078dcc9ec76/xing.svg?q=110") no-repeat;}
+    
+    
+      .xing:hover {background:url("https://stag-static-www.elastic.co/assets/bltededebe5f7521a39/xing-hover.svg?q=110")}		
+    
+	
+    
+		.youtube{background:url("https://stag-static-www.elastic.co/assets/blt4982061ce1aebc7f/youtube.svg?q=110") no-repeat;}
+    
+    
+      .youtube:hover {background:url("https://stag-static-www.elastic.co/assets/bltddeb6c6404ae81a5/youtube-hover.svg?q=110")}		
     
 	
 </style>
@@ -1223,11 +1223,11 @@ merge and publish a new version of the plugin.</p></div></div><div class="navfoo
 	var suggestionsUrl = "https://search.elastic.co/suggest";	
 	var localeUrl = '{"relative_url_prefix":"/","code":"en-us","url":"/guide_template"}';
 </script>
-<script src="https://stag-static-www.elastic.co/static/js/jquery.autocomplete.js?q=852"></script>
-<script src="https://stag-static-www.elastic.co/static/js/jquery.cookie.js?q=852"></script>
-<script type="text/javascript" src="https://stag-static-www.elastic.co/static/js/slick.min.js?q=852"></script>
-<script src="https://stag-static-www.elastic.co/static/js/nav-v5.js?q=852"></script>
-<script src="https://stag-static-www.elastic.co/static/js/script.js?q=852"></script> 
+<script src="https://stag-static-www.elastic.co/static/js/jquery.autocomplete.js?q=110"></script>
+<script src="https://stag-static-www.elastic.co/static/js/jquery.cookie.js?q=110"></script>
+<script type="text/javascript" src="https://stag-static-www.elastic.co/static/js/slick.min.js?q=110"></script>
+<script src="https://stag-static-www.elastic.co/static/js/nav-v5.js?q=110"></script>
+<script src="https://stag-static-www.elastic.co/static/js/script.js?q=110"></script> 
      
      <style></style>
      
